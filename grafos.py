@@ -7,10 +7,10 @@ class Grafo_nD_P: #grafo nao dirigido e ponderado
         self.w = w  #função que mapeia o peso de cada aresta {u, v} ∈ E
 
     def qtdVertices(self):
-        return 0
+        return len(self.V)
 
     def qtdArestas(self):
-        return 0
+        return len(self.E)
 
     def grau(self, v):
         return 0
