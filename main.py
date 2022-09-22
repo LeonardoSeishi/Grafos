@@ -14,13 +14,12 @@ class Main:
     grafo.ler(file_path)
 
     # imprime o array de vertices
-    print(grafo.adj[0])
     for i in grafo.adj:
         print(i)
     
-    #print(grafo.qtdVertices())
+    print(grafo.qtdVertices())
     print(grafo.qtdArestas())
-    # print(grafo.grau())
+    print(grafo.grau(1))
     # print(grafo.rotulo())
     # print(grafo.vizinhos())
     # print(grafo.haAresta())
