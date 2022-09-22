@@ -3,41 +3,42 @@ class Graph:
 	# com None como primeiro elemento pois os vértices dos arquivos de 
 	# texto iniciam pelo número 1.
 	def __init__(self):
-		self.__adj = [] # array de vertices
-		self.__are = [] # array de arestas
+		self.__vertices = {} # array de vertices
+		self.__arestas = [] # array de arestas
 
 	@property
 	def adj(self):
-			return self.__adj
+			return self.__vertices
 	@property
 	def ver(self):
-			return self.__are
+			return self.__arestas
 
 
 	# Complexidade O(1)
 	# TODO: Retirar o menos um se nao tiver o NoneType como primeiro elemento
 	def qtdVertices(self):
-		return len(self.__adj) - 1
+		return len(self.__vertices) - 1
 
     # Complexidade O(1)
 	# TODO: Mudar o começo do for de 1 para zero se nao tiver o NoneType como primeiro elemento
 	def qtdArestas(self):
-		return len(self.__are) 
+		return len(self.__arestas)
 
     # # Numero de vizinhos
 	def grau(self, v):
-		return len(self.__adj[v]["vizinhos"])
+		return len(self.__vertices[v]["vizinhos"])
 
 	def rotulo(self, v):
-		return self.__adj[v]
+		return self.__vertices[v]["rotulo"]
 
 	# TODO : printar o nome dos usuários
+	# ! esta saindo um none no final
 	def vizinhos(self, v):
-		for i in self.__are:
-			if self.haAresta(v, i[])
+		for i in self.__vertices[v]["vizinhos"]:
+			print(self.__vertices[i]["rotulo"])
 
 	def haAresta(self, u, v):
-		return v in self.__[u]["vizinhos"]
+		return v in self.__[u]["arestas"]
 		
 	def peso(self, u, v):
 		if self.haAresta(u, v):
@@ -58,11 +59,11 @@ class Graph:
 		for line in range(number_vertices):
 			line = file.readline()
 			words = line.split("\"") # funciona enquanto os rotulos estiverem dentro de aspas duplas
-			vertice = {int(words[0]): "", "size": 0, "vizinhos": []}
-			vertice[int(words[0])] = words[1]
-			self.__adj.append(vertice)
+			# ? O que vai ser o size
+			vertice = {"rotulo": words[1], "size": 0, "vizinhos": set()}
+			self.__vertices[int(words[0])] = vertice
 
-		file.readline() # para pular a linha "*edges"
+		file.readline() # Pula a linha "*edges"
 
 		while True:
 			line = file.readline()
@@ -72,8 +73,12 @@ class Graph:
 			vert1 = int(vert1)
 			vert2 = int(vert2)
 			weight = float(weight)
+			
+
+			self.__vertices[vert1]["vizinhos"].add(vert2)
+			self.__vertices[vert2]["vizinhos"].add(vert1)
 			aresta = {(vert1, vert2): weight}
-			self.__are.append(aresta)
+			self.__arestas.append(aresta)
 
 
 
