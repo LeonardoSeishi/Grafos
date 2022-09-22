@@ -1,4 +1,5 @@
 from grafos import *
+from buscas import busca_largura
 import sys
 
 class Main:
@@ -10,7 +11,7 @@ class Main:
         file_path = sys.argv[1]
     else:
         file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
-
+        # file_path = "instancias/teste_busca/teste_busca_largura.net"
     grafo.ler(file_path)
 
     # imprime o array de vertices
@@ -21,7 +22,9 @@ class Main:
     #print(grafo.qtdArestas())
     #print(grafo.grau(1))
     #print(grafo.rotulo(2))
-    print(grafo.vizinhos(1))
-    # print(grafo.haAresta())
-    # print(grafo.peso())
+    #print(grafo.vizinhos(1))
+    #print(grafo.haAresta(1, 4))
+    #print(grafo.peso(1, 3))
+    #print(grafo.entrantes(5))
+    print(busca_largura(grafo, 2))
     

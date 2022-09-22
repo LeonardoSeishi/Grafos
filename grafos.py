@@ -17,7 +17,7 @@ class Graph:
 	# Complexidade O(1)
 	# TODO: Retirar o menos um se nao tiver o NoneType como primeiro elemento
 	def qtdVertices(self):
-		return len(self.__vertices) - 1
+		return len(self.__vertices)
 
     # Complexidade O(1)
 	# TODO: Mudar o começo do for de 1 para zero se nao tiver o NoneType como primeiro elemento
@@ -38,11 +38,13 @@ class Graph:
 			print(self.__vertices[i]["rotulo"])
 
 	def haAresta(self, u, v):
-		return v in self.__[u]["arestas"]
+		return u in self.__vertices[v]["vizinhos"]
 		
 	def peso(self, u, v):
 		if self.haAresta(u, v):
-			return self.__are[(u, v)]
+			for i in self.__arestas:
+				if (i[0] == u and i[1] == v) or (i[0] == v and i[0] == u):
+					return i[2]
 
 	# ? O primeiro elemento a ser inserido na lista é NoneType. está correto?
 	def ler(self, file_path):
@@ -60,7 +62,7 @@ class Graph:
 			line = file.readline()
 			words = line.split("\"") # funciona enquanto os rotulos estiverem dentro de aspas duplas
 			# ? O que vai ser o size
-			vertice = {"rotulo": words[1], "size": 0, "vizinhos": set()}
+			vertice = {"rotulo": words[1], "vizinhos": set()}
 			self.__vertices[int(words[0])] = vertice
 
 		file.readline() # Pula a linha "*edges"
@@ -77,8 +79,23 @@ class Graph:
 
 			self.__vertices[vert1]["vizinhos"].add(vert2)
 			self.__vertices[vert2]["vizinhos"].add(vert1)
-			aresta = {(vert1, vert2): weight}
+			aresta = (vert1, vert2, weight)
 			self.__arestas.append(aresta)
 
 
+	def saintes(self, v):
+		saintes = list()
+		for i in self.__arestas:
+			if i[0] == v:
+				saintes.append(i[1])
+
+		return saintes
+
+	def entrantes(self, v):
+		entrantes = list()
+		for i in self.__arestas:
+			if i[1] == v:
+				entrantes.append(i[0])
+
+		return entrantes
 
