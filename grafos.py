@@ -1,81 +1,100 @@
-# biblioteca de grafos
+class Graph:
+    # Por enquanto, o array de vertices está sendo inicializado
+    # com None como primeiro elemento pois os vértices dos arquivos de
+    # texto iniciam pelo número 1.
+    def __init__(self):
+        self.__vertices = {}  # array de vertices
+        self.__arestas = []  # array de arestas
 
-class Grafo_nD_P:  # grafo nao dirigido e ponderado
-    def __init__(self, V=None, E=None, w=None):
-        # conjunto de vertices [(1, "rotulo 1"), (2, "rotulo 2"), ...]
-        self.V = V
-        self.E = E  # conjunto de arestas [(1, 2), (1, 3), ..., (5, 6)]
-        self.w = w  # função que mapeia o peso de cada aresta {u, v} ∈ E
-        # [(1, 2, 1.0), (1, 3, 4.3), ...]
+    @property
+    def adj(self):
+        return self.__vertices
+
+    @property
+    def ver(self):
+        return self.__arestas
 
     # Complexidade O(1)
+    # TODO: Retirar o menos um se nao tiver o NoneType como primeiro elemento
+
     def qtdVertices(self):
-        return len(self.V)
+        return len(self.__vertices)
 
     # Complexidade O(1)
+    # TODO: Mudar o começo do for de 1 para zero se nao tiver o NoneType como primeiro elemento
     def qtdArestas(self):
-        return len(self.E)
+        return len(self.__arestas)
 
-    # Numero de vizinhos
-    # Complexidade O(n)
+    # # Numero de vizinhos
     def grau(self, v):
-        return len(self.vizinhos(v))
+        return len(self.__vertices[v]["vizinhos"])
 
-    # Complexidade O(n)
     def rotulo(self, v):
-        for i in self.V:
-            if (i[0] == v):
-                return i[1]
-        return 0
+        return self.__vertices[v]["rotulo"]
 
-    # Complexidade O(n)
+    # TODO : printar o nome dos usuários
+    # ! esta saindo um none no final
     def vizinhos(self, v):
-        neighbors = []
-        for i in self.E:
-            if i[0] == v:
-                neighbors.append(i[1])
-            if i[1] == v:
-                neighbors.append(i[0])
-        return neighbors
+        for i in self.__vertices[v]["vizinhos"]:
+            print(self.__vertices[i]["rotulo"])
 
-    # Complexidade O(n)
     def haAresta(self, u, v):
-        for i in self.w:
-            if (i[0] == u and i[1] == v) or (i[0] == v and i[1] == u):
-                return True
+        return u in self.__vertices[v]["vizinhos"]
 
-        return False
-
-    # Complexidade O(n)
     def peso(self, u, v):
-        for i in self.w:
-            if (i[0] == u and i[1] == v) or (i[0] == v and i[1] == u):
-                return i[2]
+        if self.haAresta(u, v):
+            for i in self.__arestas:
+                if (i[0] == u and i[1] == v) or (i[0] == v and i[0] == u):
+                    return i[2]
 
-        return False
+    # ? O primeiro elemento a ser inserido na lista é NoneType. está correto?
+    def ler(self, file_path):
+        try:
+            file = open(file_path, 'r')
+        except FileNotFoundError:
+            print("Arquivo nao encontrado")
 
-    def ler(self, arquivo):
-        file = open(arquivo, "r")
-        verticeList = list()
-        edgesList = list()
-        weightList = list()
-        # Utilizado para controle de iteração
-        # Linha 1 ate n -> vertices
-        # Linha n + 2 ate fim -> arestas
-        counter = 0
-        for line in file:
-            values = line.split()
-            if values[0] == "*vertices":
-                counter = int(values[1]) + 1  # Gambiarra
-            if values[0] != "*vertices" and values[0] != "*edges" and counter > 0:
-                verticeList.append((int(values[0]), line.split("\"")[1]))
-            if values[0] != "*vertices" and values[0] != "*edges" and counter < 0:
-                edgesList.append((int(values[0]), int(values[1])))
-                weightList.append(
-                    (int(values[0]), int(values[1]), float(values[2])))
-            counter -= 1
-        file.close()
-        self.V = verticeList
-        self.E = edgesList
-        self.w = weightList
-        return 0
+        try:
+            number_vertices = int(file.readline()[10:-1])
+        except ValueError:
+            print("Nao foi possivel obter numero de vertices")
+
+        for line in range(number_vertices):
+            line = file.readline()
+            # funciona enquanto os rotulos estiverem dentro de aspas duplas
+            words = line.split("\"")
+            # ? O que vai ser o size
+            vertice = {"rotulo": words[1], "vizinhos": set()}
+            self.__vertices[int(words[0])] = vertice
+
+        file.readline()  # Pula a linha "*edges"
+
+        while True:
+            line = file.readline()
+            if not line:
+                break
+            vert1, vert2, weight = line.split()
+            vert1 = int(vert1)
+            vert2 = int(vert2)
+            weight = float(weight)
+
+            self.__vertices[vert1]["vizinhos"].add(vert2)
+            self.__vertices[vert2]["vizinhos"].add(vert1)
+            aresta = (vert1, vert2, weight)
+            self.__arestas.append(aresta)
+
+    def saintes(self, v):
+        saintes = list()
+        for i in self.__arestas:
+            if i[0] == v:
+                saintes.append(i[1])
+
+        return saintes
+
+    def entrantes(self, v):
+        entrantes = list()
+        for i in self.__arestas:
+            if i[1] == v:
+                entrantes.append(i[0])
+
+        return entrantes
