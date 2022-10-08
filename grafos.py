@@ -1,4 +1,5 @@
 class Graph:
+	# ? Isso ainda acontece ??
 	# Por enquanto, o array de vertices está sendo inicializado
 	# com None como primeiro elemento pois os vértices dos arquivos de 
 	# texto iniciam pelo número 1.
@@ -39,13 +40,18 @@ class Graph:
 
 	# Retorna um booleano se existe uma aresta entre o vertice u e v
 	def haAresta(self, u, v):
-		return u in self.__vertices[v]["vizinhos"]
+		for e in self.__arestas:
+			if e[0] == u and e[1] == v:
+				return True
+			else:
+				return False
 		
 	# Retorna o peso de uma aresta entre o vertice u e v
 	def peso(self, u, v):
 		if self.haAresta(u, v):
 			for i in self.__arestas:
-				if (i[0] == u and i[1] == v) or (i[0] == v and i[0] == u):
+				print(i[0], i[1])
+				if (i[0] == u and i[1] == v):
 					return i[2]
 
 	# Ler o arquivo e cria o grafo
@@ -90,6 +96,7 @@ class Graph:
 
 			self.__vertices[vert1]["vizinhos"].add(vert2)
 			self.__vertices[vert2]["vizinhos"].add(vert1)
+			print(vert1, vert2 , weight)
 			aresta = (vert1, vert2, weight)
 			self.__arestas.append(aresta)
 

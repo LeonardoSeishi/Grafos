@@ -1,5 +1,6 @@
+from floyd_warshall import floyd_warshall, imprime_floyd_warshall
 from grafos import *
-from buscas import busca_largura
+from buscas import busca_largura, imprime_busca
 import sys
 
 class Main:
@@ -11,7 +12,7 @@ class Main:
         file_path = sys.argv[1]
     else:
         #file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
-        file_path = "instancias/teste_busca/teste_busca_largura.net"
+        file_path = "instancias/teste_locais/teste_floyd_warshall.net"
     grafo.ler(file_path)
 
     # imprime o array de vertices
@@ -26,5 +27,7 @@ class Main:
     #print(grafo.haAresta(1, 4))
     #print(grafo.peso(1, 3))
     #print(grafo.entrantes(5))
-    print(busca_largura(grafo, 1))
-    
+    #t = busca_largura(grafo, 1)
+    #imprime_busca(t[0], grafo.qtdVertices())
+    mtx = floyd_warshall(grafo)
+    #imprime_floyd_warshall(mtx, grafo.qtdVertices())
