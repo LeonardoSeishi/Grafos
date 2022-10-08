@@ -22,7 +22,6 @@ def busca_largura(G, s):
     while not(Q.empty()):
         u = Q.get()
         saintes = G.saintes(u)
-        print(f"u é {u} e saintes de u  {saintes}")
 
 
         for v in saintes:
@@ -34,4 +33,27 @@ def busca_largura(G, s):
     
     return D, A
 
+def imprime_busca(D, qtdV):
+    maxLevel = max(D.values()) 
+    count = 0
 
+    while count <= maxLevel:
+        level = []
+        print(f"{count}: ", end='')
+        for i in range(1, qtdV + 1):
+            if D[i] == count:
+                level.append(i)
+
+        if len(level) > 1:  
+            for i in range(0, len(level)):
+                if i == len(level)-1:
+                    print(f"{level[i]}", end="\n")
+                else:
+                    print(f"{level[i]},", end=" ")
+        else:
+           print(f"{level[0]}", end="\n") 
+        
+                
+        
+        count += 1
+        level.clear()
