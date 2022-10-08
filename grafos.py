@@ -1,17 +1,14 @@
 class Graph:
-    # Por enquanto, o array de vertices está sendo inicializado
-    # com None como primeiro elemento pois os vértices dos arquivos de
-    # texto iniciam pelo número 1.
     def __init__(self):
-        self.__vertices = {}  # array de vertices
+        self.__vertices = {}  # dicionario de vertices
         self.__arestas = []  # array de arestas
 
     @property
-    def adj(self):
+    def vertices(self):
         return self.__vertices
 
     @property
-    def ver(self):
+    def arestas(self):
         return self.__arestas
 
     # Complexidade O(1)
@@ -38,13 +35,16 @@ class Graph:
         for i in self.__vertices[v]["vizinhos"]:
             print(self.__vertices[i]["rotulo"])
 
+    def vizinhos_lista(self, v):
+        return list(self.__vertices[v]["vizinhos"])
+
     def haAresta(self, u, v):
         return u in self.__vertices[v]["vizinhos"]
 
     def peso(self, u, v):
         if self.haAresta(u, v):
             for i in self.__arestas:
-                if (i[0] == u and i[1] == v) or (i[0] == v and i[0] == u):
+                if (i[0] == u and i[1] == v) or (i[0] == v and i[1] == u):
                     return i[2]
 
     # ? O primeiro elemento a ser inserido na lista é NoneType. está correto?
@@ -98,3 +98,6 @@ class Graph:
                 entrantes.append(i[0])
 
         return entrantes
+
+    def vertices_list(self):
+        return list(self.__vertices.keys())
