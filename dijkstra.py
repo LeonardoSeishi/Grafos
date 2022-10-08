@@ -53,8 +53,8 @@ def dijkstra(grafo, s):
         for v in grafo.vizinhos_lista(u):
             if (C[v]):  # vertices ja percorridos nao entram no laco
                 continue
-            if (D[v] > D[u] + grafo.peso(u, v)):
-                D[v] = D[u] + grafo.peso(u, v)
+            if (D[v] > D[u] + grafo.peso_nao_dirigido(u, v)):
+                D[v] = D[u] + grafo.peso_nao_dirigido(u, v)
                 A[v] = u
 
     # print solicitado pela atividade

@@ -12,42 +12,54 @@ class Graph:
         return self.__arestas
 
     # Complexidade O(1)
-    # TODO: Retirar o menos um se nao tiver o NoneType como primeiro elemento
-
     def qtdVertices(self):
         return len(self.__vertices)
 
     # Complexidade O(1)
-    # TODO: Mudar o começo do for de 1 para zero se nao tiver o NoneType como primeiro elemento
     def qtdArestas(self):
         return len(self.__arestas)
 
-    # # Numero de vizinhos
+    # Retorna o numero de vizinhos de um vertice v
     def grau(self, v):
         return len(self.__vertices[v]["vizinhos"])
 
+    # Retorna o rotulo de um vertice v
     def rotulo(self, v):
         return self.__vertices[v]["rotulo"]
 
-    # TODO : printar o nome dos usuários
-    # ! esta saindo um none no final
+    # Retorna uma lista com todos os vizinhos de v
     def vizinhos(self, v):
+        viz = list()
         for i in self.__vertices[v]["vizinhos"]:
-            print(self.__vertices[i]["rotulo"])
+            viz.append(self.__vertices[i]["rotulo"])
+        return viz
 
+    # Retorna uma lista com os vizinhos em numeros
     def vizinhos_lista(self, v):
         return list(self.__vertices[v]["vizinhos"])
 
+    # Retorna um booleano se existe uma aresta entre o vertice u e v
     def haAresta(self, u, v):
-        return u in self.__vertices[v]["vizinhos"]
+        for e in self.__arestas:
+            if e[0] == u and e[1] == v:
+                return True
+        return False
 
+    # Retorna o peso de uma aresta entre o vertice u e v
     def peso(self, u, v):
         if self.haAresta(u, v):
+            for i in self.__arestas:
+                if (i[0] == u and i[1] == v):
+                    return i[2]
+
+    # Confere as duas direcoes da aresta, usado no dijkstra
+    def peso_nao_dirigido(self, u, v):
+        if self.haAresta(u, v) or self.haAresta(v, u):
             for i in self.__arestas:
                 if (i[0] == u and i[1] == v) or (i[0] == v and i[1] == u):
                     return i[2]
 
-    # ? O primeiro elemento a ser inserido na lista é NoneType. está correto?
+    # Ler o arquivo e cria o grafo
     def ler(self, file_path):
         try:
             file = open(file_path, 'r')
@@ -61,13 +73,21 @@ class Graph:
 
         for line in range(number_vertices):
             line = file.readline()
-            # funciona enquanto os rotulos estiverem dentro de aspas duplas
-            words = line.split("\"")
-            # ? O que vai ser o size
-            vertice = {"rotulo": words[1], "vizinhos": set()}
+
+            # Quando o rotulo for uma string
+            try:
+                # funciona enquanto os rotulos estiverem dentro de aspas duplas
+                words = line.split("\"")
+                vertice = {"rotulo": words[1], "vizinhos": set()}
+            # Quando o rotulo for um inteiro (utilizado para testes)
+            except:
+                words = line.split()
+                vertice = {"rotulo": int(words[1]), "vizinhos": set()}
+
             self.__vertices[int(words[0])] = vertice
 
-        file.readline()  # Pula a linha "*edges"
+        # Pula a linha "*edges"
+        file.readline()
 
         while True:
             line = file.readline()
@@ -83,6 +103,7 @@ class Graph:
             aresta = (vert1, vert2, weight)
             self.__arestas.append(aresta)
 
+    # Retorna um lista com os vertices vizinhos que saem de v
     def saintes(self, v):
         saintes = list()
         for i in self.__arestas:
@@ -91,6 +112,7 @@ class Graph:
 
         return saintes
 
+    # Retorna uma lista com os vertices que tem arestas dirigidas para v
     def entrantes(self, v):
         entrantes = list()
         for i in self.__arestas:
@@ -99,5 +121,6 @@ class Graph:
 
         return entrantes
 
+    # retorna a lista de vertices em numeros
     def vertices_list(self):
         return list(self.__vertices.keys())
