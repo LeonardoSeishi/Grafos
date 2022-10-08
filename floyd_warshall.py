@@ -3,7 +3,6 @@ from grafos import Graph
 def floyd_warshall(G):
     qtdV = G.qtdVertices()
     Dold = cria_mtx_w(G, qtdV)
-    imprime_floyd_warshall(Dold, qtdV)
 
     for k in range (1, qtdV + 1):
         Dnew = {}
@@ -26,7 +25,6 @@ def cria_mtx_w(G, qtdV):
     
     for i in range(1, qtdV + 1):
         for j in range(1, qtdV + 1):
-            print(i, j, G.haAresta(i, j))
             if i == j:
                 W[i][j] = 0
                 

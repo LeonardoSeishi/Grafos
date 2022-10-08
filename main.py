@@ -30,4 +30,4 @@ class Main:
     #t = busca_largura(grafo, 1)
     #imprime_busca(t[0], grafo.qtdVertices())
     mtx = floyd_warshall(grafo)
-    #imprime_floyd_warshall(mtx, grafo.qtdVertices())
+    imprime_floyd_warshall(mtx, grafo.qtdVertices())

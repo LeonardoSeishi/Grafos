@@ -43,14 +43,12 @@ class Graph:
 		for e in self.__arestas:
 			if e[0] == u and e[1] == v:
 				return True
-			else:
-				return False
+		return False
 		
 	# Retorna o peso de uma aresta entre o vertice u e v
 	def peso(self, u, v):
 		if self.haAresta(u, v):
 			for i in self.__arestas:
-				print(i[0], i[1])
 				if (i[0] == u and i[1] == v):
 					return i[2]
 
@@ -96,9 +94,9 @@ class Graph:
 
 			self.__vertices[vert1]["vizinhos"].add(vert2)
 			self.__vertices[vert2]["vizinhos"].add(vert1)
-			print(vert1, vert2 , weight)
 			aresta = (vert1, vert2, weight)
 			self.__arestas.append(aresta)
+
 
 	# Retorna um lista com os vertices vizinhos que saem de v
 	def saintes(self, v):
