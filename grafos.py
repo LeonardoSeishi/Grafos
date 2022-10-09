@@ -70,7 +70,9 @@ class Graph:
 			# Quando o rotulo for uma string
 			try: 
 				# funciona enquanto os rotulos estiverem dentro de aspas duplas
-				words = line.split("\"") 									
+				words = line.split("\"") 		
+				# ? Esse vizinhos deve continuar? Por que para o floyd Warshall o grafo tem que ser uma
+				# ? 							
 				vertice = {"rotulo": words[1], "vizinhos": set()}
 			# Quando o rotulo for um inteiro (utilizado para testes)
 			except: 
