@@ -14,19 +14,12 @@ class Main:
     if (len(sys.argv) > 1):
         file_path = sys.argv[1]
     else:
-        file_path = "instancias/caminho_minimo/fln_pequena.net"
+        # file_path = "instancias/caminho_minimo/fln_pequena.net"
         # file_path = "instancias/teste_busca/teste_busca_largura.net"
-        # file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
+        file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
         # file_path = "instancias/teste_locais/teste_floyd_warshall.net"
+        # file_path = "instancias/facebook/facebook_santiago.net"
     grafo.ler(file_path)
-
-    # dijkstra(grafo, 9)
-
-    # imprime o array de vertices
-    # for value in grafo.vertices.values():
-    #     print(value)
-
-    # print(grafo.peso(3, 2))
 
     # print(grafo.qtdVertices())
     # print(grafo.qtdArestas())
@@ -37,8 +30,15 @@ class Main:
     # print(grafo.peso(1, 3))
     # print(grafo.entrantes(5))
     # print(busca_largura(grafo, 2))
-    # print(grafo.entrantes(5))
-    #t = busca_largura(grafo, 1)
-    #imprime_busca(t[0], grafo.qtdVertices())
-    mtx = floyd_warshall(grafo)
-    imprime_floyd_warshall(mtx, grafo.qtdVertices())
+
+    # t = busca_largura(grafo, 9)
+    # imprime_busca(t[0], grafo.qtdVertices())
+    # mtx = floyd_warshall(grafo)
+    # imprime_floyd_warshall(mtx, grafo.qtdVertices())
+
+    # Instruções execução Dijkstra
+    # Chamar a função dijkstra(G, vertice) passando como parâmetros
+    # Um grafo G e um vértice pertencente ao grafo. A função não retorna
+    # nada e imprime na tela as distancias a partir do vértice informado
+    # exemplo:
+    # dijkstra(grafo, 6)
