@@ -3,6 +3,7 @@ from buscas import busca_largura, imprime_busca
 from dijkstra import dijkstra
 from buscas import busca_largura
 from floyd_warshall import floyd_warshall, imprime_floyd_warshall
+from ciclo_euleriano import Hierholzer
 from grafos import *
 
 
@@ -16,7 +17,7 @@ class Main:
     else:
         # file_path = "instancias/facebook/facebook_santiago.net"
         # file_path = "instancias/caminho_minimo/fln_pequena.net"
-        file_path = "instancias/teste_locais/teste_floyd_warshall.net"
+        file_path = "instancias/ciclo_euleriano/SemCicloEuleriano.net"
 
     grafo.ler(file_path)
 
@@ -47,10 +48,18 @@ class Main:
         t = busca_largura(grafo, s)
         imprime_busca(t[0], grafo.qtdVertices())
 
-     # Execício 3
+    # Execício 3
     print()
     r = input("Deseja corrigir o exercício 3? [y/n] ")
-    # if r == 'y':
+    if r == 'y':
+        (resp, ciclo) = (Hierholzer(grafo))
+        print(resp)
+        if resp:
+            for c in range(len(ciclo)):
+                if c != len(ciclo) -1:
+                    print(f'{ciclo[c]}, ',end="")
+                else:
+                    print(ciclo[c])
 
     # Execício 4
     print()
