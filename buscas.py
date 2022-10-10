@@ -4,6 +4,7 @@ from grafos import Graph as G
 
 def busca_largura(G, s):
 
+    s = int(s)
     # Estrutura que armazena um booleano que indica se um determinado vértice foi visitado
     C = {}
     # Estrutura que armazena o número de arestas necessárias para ir do vértice s (fornecido) até qualquer outro vértice

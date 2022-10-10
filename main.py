@@ -15,7 +15,8 @@ class Main:
         file_path = sys.argv[1]
     else:
         # file_path = "instancias/facebook/facebook_santiago.net"
-        file_path = "instancias/caminho_minimo/fln_pequena.net"
+        # file_path = "instancias/caminho_minimo/fln_pequena.net"
+        file_path = "instancias/teste_locais/teste_floyd_warshall.net"
 
     grafo.ler(file_path)
 
@@ -35,7 +36,7 @@ class Main:
         v = input("v = ")
         print()
         print("A aresta existe? ", grafo.haAresta(u, v))
-        print("Peso: ", grafo.peso(u, v))
+        print("Peso: ", grafo.peso_nao_dirigido(u, v))
 
     # Execício 2
     print()

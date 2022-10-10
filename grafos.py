@@ -41,22 +41,22 @@ class Graph:
     # Retorna um booleano se existe uma aresta entre o vertice u e v
     def haAresta(self, u, v):
         for e in self.__arestas:
-            if e[0] == u and e[1] == v:
+            if e[0] == int(u) and e[1] == int(v):
                 return True
         return False
 
     # Retorna o peso de uma aresta entre o vertice u e v
-    def peso(self, u, v):
+    def peso_dirigido(self, u, v):
         if self.haAresta(u, v):
             for i in self.__arestas:
-                if (i[0] == u and i[1] == v):
+                if (i[0] == int(u) and i[1] == int(v)):
                     return i[2]
 
     # Confere as duas direcoes da aresta, usado no dijkstra
     def peso_nao_dirigido(self, u, v):
         if self.haAresta(u, v) or self.haAresta(v, u):
             for i in self.__arestas:
-                if (i[0] == u and i[1] == v) or (i[0] == v and i[1] == u):
+                if (i[0] == int(u) and i[1] == int(v)) or (i[0] == int(v) and i[1] == int(u)):
                     return i[2]
 
     # Ler o arquivo e cria o grafo
@@ -104,19 +104,19 @@ class Graph:
             self.__arestas.append(aresta)
 
     # Retorna um lista com os vertices vizinhos que saem de v
-    def saintes(self, v):
+    def saintes_ponderado(self, v):
         saintes = list()
         for i in self.__arestas:
-            if i[0] == v:
+            if i[0] == int(v):
                 saintes.append(i[1])
 
         return saintes
 
     # Retorna uma lista com os vertices que tem arestas dirigidas para v
-    def entrantes(self, v):
+    def entrantes_ponderado(self, v):
         entrantes = list()
         for i in self.__arestas:
-            if i[1] == v:
+            if i[1] == int(v):
                 entrantes.append(i[0])
 
         return entrantes
