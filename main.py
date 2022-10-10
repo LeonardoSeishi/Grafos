@@ -17,6 +17,8 @@ class Main:
         # file_path = "instancias/facebook/facebook_santiago.net"
         file_path = "instancias/caminho_minimo/fln_pequena.net"
         # file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
+        # file_path = "instancias/caminho_minimo/fln_pequena.net"
+        # file_path = "instancias/teste_locais/teste_floyd_warshall.net"
 
     grafo.ler(file_path)
 
@@ -36,7 +38,7 @@ class Main:
         v = input("v = ")
         print()
         print("A aresta existe? ", grafo.haAresta(u, v))
-        print("Peso: ", grafo.peso(u, v))
+        print("Peso: ", grafo.peso_nao_dirigido(u, v))
 
     # Execício 2
     print()
@@ -44,7 +46,7 @@ class Main:
     if r == 'y':
         print("Coloque o vertice s")
         s = input("s = ")
-        t = busca_largura(grafo, int(s))
+        t = busca_largura(grafo, s)
         imprime_busca(t[0], grafo.qtdVertices())
 
      # Execício 3

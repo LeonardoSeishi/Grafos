@@ -11,7 +11,6 @@ def floyd_warshall(G):
         
         for i in range (1, qtdV + 1):
             for j in range(1, qtdV + 1):
-                # print(i, j, Dold[i][j], Dold[i][k] + Dold[k][j])
                 Dnew[i][j] = min(Dold[i][j], Dold[i][k] + Dold[k][j])
     
         Dold = Dnew
@@ -29,7 +28,7 @@ def cria_mtx_w(G, qtdV):
                 W[i][j] = 0
                 
             elif G.haAresta(i, j):
-                W[i][j] = G.peso(i, j)
+                W[i][j] = G.peso_dirigido(i, j)
 
             else: 
                 W[i][j] = float('inf')
