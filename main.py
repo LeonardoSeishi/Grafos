@@ -16,6 +16,7 @@ class Main:
     else:
         # file_path = "instancias/facebook/facebook_santiago.net"
         file_path = "instancias/caminho_minimo/fln_pequena.net"
+        # file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
 
     grafo.ler(file_path)
 
@@ -43,7 +44,7 @@ class Main:
     if r == 'y':
         print("Coloque o vertice s")
         s = input("s = ")
-        t = busca_largura(grafo, s)
+        t = busca_largura(grafo, int(s))
         imprime_busca(t[0], grafo.qtdVertices())
 
      # Execício 3
