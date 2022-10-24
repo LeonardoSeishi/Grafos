@@ -1,0 +1,20 @@
+*vertices 7
+1 "Acordar"
+2 "EscovarDente"
+3 "VestirRoupaDeBaixo"
+4 "Camisa"
+5 "Calça"
+6 "Meia"
+7 "Tenis"
+*edges
+1 2 1.0
+1 3 1.0
+1 5 1.0
+1 6 1.0
+1 7 1.0
+2 4 1.0
+2 5 1.0
+3 5 1.0
+5 4 1.0
+5 7 1.0
+6 7 1.0
