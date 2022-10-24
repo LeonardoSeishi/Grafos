@@ -1,7 +1,7 @@
 class Graph:
     def __init__(self):
         self.__vertices = {}  # dicionario de vertices
-        self.__arestas = []  # array de arestas
+        self.__arestas = []   # array de arestas
 
     @property
     def vertices(self):
