@@ -33,7 +33,6 @@ def dfs_visit_ot(G, v, C, T, F, tempo, O):
     tempo = tempo + 1
     T[v]  = tempo
 
-    # TODO: mudar para não ponderado
     vizinhos = G.saintes(v)
     for i in vizinhos:
         if not(C[i]):
