@@ -24,9 +24,9 @@ def busca_largura(G, s):
 
     while not (Q.empty()):
         u = Q.get()
-        saintes = G.saintes(u)
+        vizinhos = G.vizinhos_lista(u)
 
-        for v in saintes:
+        for v in vizinhos:
             if C[v] == False:
                 C[v] = True
                 D[v] = D[u] + 1

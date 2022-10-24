@@ -16,8 +16,11 @@ class Main:
         file_path = sys.argv[1]
     else:
         # file_path = "instancias/facebook/facebook_santiago.net"
+        file_path = "instancias/caminho_minimo/fln_pequena.net"
+        # file_path = "instancias/arvore_geradora_minima/agm_tiny.net"
         # file_path = "instancias/caminho_minimo/fln_pequena.net"
         file_path = "instancias/ciclo_euleriano/SemCicloEuleriano.net"
+        # file_path = "instancias/teste_locais/teste_floyd_warshall.net"
 
     grafo.ler(file_path)
 
