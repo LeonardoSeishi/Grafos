@@ -90,7 +90,6 @@ class Graph:
 
             self.__vertices[int(words[0])] = vertice
 
-        # Pula a linha "*edges"
         # Arcs or Edges?
         line = file.readline()
         connection = line.split()[0][1:]
