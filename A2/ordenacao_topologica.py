@@ -1,6 +1,6 @@
 import sys
 
-sys.path.insert(0, "../Grafos/Grafos")
+sys.path.insert(0, "../Grafos")
 
 from grafos import *
 
