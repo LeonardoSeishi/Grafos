@@ -1,8 +1,9 @@
-import sys
-sys.path.insert(0, "/home/vvc/Desktop/A1 Project/Grafos/Grafos")
-
+from cfc import *
 from grafos import *
 from ordenacao_topologica import visit_ot, print_ord
+import sys
+# sys.path.insert(0, "/home/vvc/Desktop/A1 Project/Grafos/Grafos")
+
 
 class A2:
     grafo = Graph()
@@ -12,26 +13,26 @@ class A2:
     if (len(sys.argv) > 1):
         file_path = sys.argv[1]
     else:
-        file_path = "instancias/teste_locais/abcd.net"
+        # file_path = "../instancias/dirigidos/dirigido1.net"
+        # file_path = "../instancias/teste_locais/abcd.net"
+        file_path = "../instancias/teste_locais/componentes.net"
 
     grafo.ler(file_path)
 
-    # Exercício 1
-    r = input("Deseja corrigir o exercício 1? [y/n] ")
-    if r == 'y':
-        pass
-   
+    # # Exercício 1
+    # r = input("Deseja corrigir o exercício 1? [y/n] ")
+    # if r == 'y':
+    #     pass
+
     # Execício 2
     print()
     r = input("Deseja corrigir o exercício 2? [y/n] ")
     if r == 'y':
         l = visit_ot(grafo)
         print_ord(grafo, l)
-        
 
     # Execício 3
     print()
     r = input("Deseja corrigir o exercício 3? [y/n] ")
     if r == 'y':
-        pass
-
+        cfc(grafo)
