@@ -130,3 +130,13 @@ class Graph:
     # retorna a lista de vertices em numeros
     def vertices_list(self):
         return list(self.__vertices.keys())
+
+    # utilizado pelo algoritmo de fluxo_maximo para criacao
+    # de grafo residual
+    def insere_aresta(self, element):
+        self.__arestas.append(element)
+
+    def atualiza_peso(self, u, v, peso):
+        for i in range(len(self.__arestas)):
+            if (self.__arestas[i][0] == u and self.__arestas[i][1] == v):
+                self.__arestas[i] = (u, v, peso)
