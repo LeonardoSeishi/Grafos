@@ -12,12 +12,15 @@ class A3:
     if (len(sys.argv) > 1):
         file_path = sys.argv[1]
     else:
-        file_path = "../instancias/fluxo_maximo/fluxo.net"
+        file_path = "../instancias/fluxo_maximo/wiki.net"
 
     grafo.ler(file_path)
+    # print(grafo.arestas)
+    # print()
+    # print(grafo.vertices)
 
-    fluxo_maximo(grafo, 1, 4)
+    # grafo.confere_e_cria_vertice_fluxo()
 
-    # grafo.atualiza_peso(1, 2, 3)
+    fluxo_maximo(grafo, 1, 7)
 
     print("deu")

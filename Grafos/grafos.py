@@ -1,3 +1,6 @@
+from idna import valid_string_length
+
+
 class Graph:
     def __init__(self):
         self.__vertices = {}  # dicionario de vertices
@@ -136,7 +139,43 @@ class Graph:
     def insere_aresta(self, element):
         self.__arestas.append(element)
 
-    def atualiza_peso(self, u, v, peso):
+    # utilizado pelo algoritmo de fluxo_maximo para checar
+    # a existencia de arestas u,v e v,u. Caso existam cria novo
+    # vertice v' e conecta v->v' e v'->u
+    def confere_e_cria_vertice_fluxo(self):
+        for i in range(len(self.__arestas)):
+            u = self.__arestas[i][0]
+            v = self.__arestas[i][1]
+            for j in range(i + 1, len(self.__arestas)):
+                if (self.__arestas[j][0] == v and self.__arestas[j][1] == u):
+                    # cria novo vertice
+                    num = len(self.__vertices) + 1
+                    vertice = {"rotulo": str(num)+"x", "vizinhos": set()}
+                    self.__vertices[num] = vertice
+                    # adiciona 'u' como vizinho
+                    self.__vertices[num]["vizinhos"].add(u)
+                    # adiciona novo vertice como vizinho de 'v'
+                    self.__vertices[v]["vizinhos"].add(num)
+                    # elimina 'u' como vizinho de 'v'
+                    self.__vertices[v]["vizinhos"].remove(u)
+
+                    # Atualiza lista de arestas
+                    cap = self.__arestas[j][2]
+                    self.__arestas.pop(j)
+                    self.__arestas.append((v, num, cap))
+                    self.__arestas.append((num, u, cap))
+                    break
+
+    # utilizado pelo algoritmo de fluxo_maximo para
+    # atualizacao dos valores das capacidades de cada arco
+
+    def atualiza_capacidades(self, u, v, fluxo):
+        # cap(u, v) = cap(u, v) - fluxo
         for i in range(len(self.__arestas)):
             if (self.__arestas[i][0] == u and self.__arestas[i][1] == v):
-                self.__arestas[i] = (u, v, peso)
+                self.__arestas[i] = (u, v, self.__arestas[i][2] - fluxo)
+
+        # cap(v, u) = cap(v, u) + fluxo
+        for i in range(len(self.__arestas)):
+            if (self.__arestas[i][0] == v and self.__arestas[i][1] == u):
+                self.__arestas[i] = (v, u, self.__arestas[i][2] + fluxo)
