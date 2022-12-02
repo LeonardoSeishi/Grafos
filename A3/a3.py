@@ -16,4 +16,18 @@ class A3:
 
     grafo.ler(file_path)
 
-    fluxo_maximo(grafo, 1, 7)
+    # Exercício 1
+    r = input("Deseja corrigir o exercício 1? [y/n] ")
+    if r == 'y':
+        # é necessario informar o vertice de inicio e de fim
+        fluxo_maximo(grafo, 1, 7)
+
+    # Execício 2
+    # print()
+    # r = input("Deseja corrigir o exercício 2? [y/n] ")
+    # if r == 'y':
+
+    # Execício 3
+    # print()
+    # r = input("Deseja corrigir o exercício 3? [y/n] ")
+    # if r == 'y':
