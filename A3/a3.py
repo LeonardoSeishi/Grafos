@@ -15,12 +15,5 @@ class A3:
         file_path = "../instancias/fluxo_maximo/wiki.net"
 
     grafo.ler(file_path)
-    # print(grafo.arestas)
-    # print()
-    # print(grafo.vertices)
-
-    # grafo.confere_e_cria_vertice_fluxo()
 
     fluxo_maximo(grafo, 1, 7)
-
-    print("deu")

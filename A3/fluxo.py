@@ -4,17 +4,13 @@ import copy
 
 def cria_grafo_residual(grafo):
     grafo_res = copy.deepcopy(grafo)
-    grafo_res.confere_e_cria_vertice_fluxo()
+    grafo_res.confere_e_cria_vertice_fluxo()  # caso exista (u,v) e (v,u)
     for i in range(len(grafo_res.arestas)):
         u = grafo_res.arestas[i][0]
         v = grafo_res.arestas[i][1]
         novo_arco = (v, u, 0)  # inverte o sentido entre 'u' e 'v'
         grafo_res.insere_aresta(novo_arco)
 
-    # print(grafo_res.arestas)
-    # print(grafo_res.vertices)
-    # print(grafo_res.arestas)
-    print("fim cria_grafo_residual")
     return grafo_res
 
 
@@ -45,7 +41,7 @@ def encontra_caminho_aumentante(grafo_res, s, t):
                         cam_aum.append(arco)
                         w = A[w]
 
-                    print("cam_aum =", cam_aum, "retornando")
+                    # print("cam_aum =", cam_aum, "retornando")
                     return cam_aum
                 fila.put(v)
     return None
@@ -54,8 +50,6 @@ def encontra_caminho_aumentante(grafo_res, s, t):
 def fluxo_maximo(grafo, s, t):
     grafo_res = cria_grafo_residual(grafo)
     F = 0  # fluxo maximo
-    print(grafo_res.vertices)
-    print(grafo_res.arestas)
 
     while True:
         cam_aum = encontra_caminho_aumentante(grafo_res, s, t)
@@ -68,16 +62,11 @@ def fluxo_maximo(grafo, s, t):
             if (arco[2] < cap_min):
                 cap_min = arco[2]
 
-        # print(grafo_res.arestas)
-
         # atualiza capacidades residuais e arcos de retorno
         for arco in cam_aum:
             grafo_res.atualiza_capacidades(arco[0], arco[1], cap_min)
-
-        # print(grafo_res.arestas)
 
         # Incrementa capacidade residual do caminho
         F = F + cap_min
 
     print("F =", F)
-    print(grafo_res.arestas)

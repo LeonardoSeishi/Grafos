@@ -168,7 +168,6 @@ class Graph:
 
     # utilizado pelo algoritmo de fluxo_maximo para
     # atualizacao dos valores das capacidades de cada arco
-
     def atualiza_capacidades(self, u, v, fluxo):
         # cap(u, v) = cap(u, v) - fluxo
         for i in range(len(self.__arestas)):
