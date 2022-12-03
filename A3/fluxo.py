@@ -37,7 +37,7 @@ def encontra_caminho_aumentante(grafo_res, s, t):
                     cam_aum = []
                     w = t
                     while (w != s):
-                        arco = (A[w], w, grafo_res.peso_nao_dirigido(A[w], w))
+                        arco = (A[w], w, grafo_res.peso_dirigido(A[w], w))
                         cam_aum.append(arco)
                         w = A[w]
 
