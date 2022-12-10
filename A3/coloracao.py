@@ -16,12 +16,8 @@ def Lawler(grafo):
             i = A.index(montaBit(dif, grafo.vertices))
             if 1 + X[i] < X[s]:
                 X[s] = 1 + X[i]
+    
     return X[-1]
-
-
-        
-    print("foi")
-    return 0
 
 def montaConj(S):
     l_ = list()
@@ -31,7 +27,6 @@ def montaConj(S):
     return set(l_)
 
 def montaBit(conjunto, vertices):
-    numberOfBits = len(vertices)
     dicAux = dict()
     for i in vertices:
         if i in conjunto:
