@@ -2,7 +2,7 @@
 from modules import *
 from fluxo import *
 from grafos import *
-
+from coloracao import Lawler
 
 class A3:
     grafo = Graph()
@@ -12,7 +12,7 @@ class A3:
     if (len(sys.argv) > 1):
         file_path = sys.argv[1]
     else:
-        file_path = "../instancias/fluxo_maximo/wiki.net"
+        file_path = "../instancias/coloracao/cor3.net"
 
     grafo.ler(file_path)
 
@@ -21,11 +21,13 @@ class A3:
     if r == 'y':
         # é necessario informar o vertice de inicio e de fim
         fluxo_maximo(grafo, 1, 7)
-
+    
     # Execício 2
-    # print()
-    # r = input("Deseja corrigir o exercício 2? [y/n] ")
-    # if r == 'y':
+    print()
+    r = input("Deseja corrigir o exercício 2? [y/n] ")
+    if r == 'y':
+        print(Lawler(grafo))
+        
 
     # Execício 3
     # print()
