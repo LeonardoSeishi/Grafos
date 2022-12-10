@@ -14,6 +14,14 @@ class Graph:
     def arestas(self):
         return self.__arestas
 
+    @vertices.setter
+    def vertices(self, value):
+        self.__vertices = value
+    
+    @arestas.setter
+    def arestas(self, value):
+        self.__arestas.append(value)
+
     # Complexidade O(1)
     def qtdVertices(self):
         return len(self.__vertices)
@@ -47,6 +55,12 @@ class Graph:
             if e[0] == int(u) and e[1] == int(v):
                 return True
         return False
+    def haArestaNdirigido(self, u, v):
+        for e in self.__arestas:
+            if (e[0] == int(u) and e[1] == int(v)) or (e[0] == int(v) and e[1] == int(u)):
+                return True
+        return False
+
 
     # Retorna o peso de uma aresta entre o vertice u e v
     def peso_dirigido(self, u, v):
