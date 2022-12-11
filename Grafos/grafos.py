@@ -85,46 +85,69 @@ class Graph:
 
         try:
             number_vertices = int(file.readline()[10:-1])
-        except ValueError:
-            print("Nao foi possivel obter numero de vertices")
-
-        for line in range(number_vertices):
-            line = file.readline()
-            # Quando o rotulo for uma string
-            try:
-                # funciona enquanto os rotulos estiverem dentro de aspas duplas
-                words = line.split("\"")
-                vertice = {"rotulo": words[1], "vizinhos": set()}
-            # Quando o rotulo não estiver dentro de aspas
-            except:
-                words = line.split()
+            for line in range(number_vertices):
+                line = file.readline()
+                # Quando o rotulo for uma string
                 try:
-                    # quando for um inteiro (utilizado para testes)
-                    vertice = {"rotulo": int(words[1]), "vizinhos": set()}
-                except:
-                    # quando for uma palavra
+                    # funciona enquanto os rotulos estiverem dentro de aspas duplas
+                    words = line.split("\"")
                     vertice = {"rotulo": words[1], "vizinhos": set()}
+                # Quando o rotulo não estiver dentro de aspas
+                except:
+                    words = line.split()
+                    try:
+                        # quando for um inteiro (utilizado para testes)
+                        vertice = {"rotulo": int(words[1]), "vizinhos": set()}
+                    except:
+                        # quando for uma palavra
+                        vertice = {"rotulo": words[1], "vizinhos": set()}
 
-            self.__vertices[int(words[0])] = vertice
+                self.__vertices[int(words[0])] = vertice
 
-        # Arcs or Edges?
-        line = file.readline()
-        connection = line.split()[0][1:]
-
-        while True:
+            # Arcs or Edges?
             line = file.readline()
-            if not line:
-                break
-            vert1, vert2, weight = line.split()
-            vert1 = int(vert1)
-            vert2 = int(vert2)
-            weight = float(weight)
+            connection = line.split()[0][1:]
 
-            self.__vertices[vert1]["vizinhos"].add(vert2)
-            if (connection == "edges"):
+            while True:
+                line = file.readline()
+                if not line:
+                    break
+                vert1, vert2, weight = line.split()
+                vert1 = int(vert1)
+                vert2 = int(vert2)
+                weight = float(weight)
+
+                self.__vertices[vert1]["vizinhos"].add(vert2)
+                if (connection == "edges"):
+                    self.__vertices[vert2]["vizinhos"].add(vert1)
+                aresta = (vert1, vert2, weight)
+                self.__arestas.append(aresta)
+        except:
+            #acontece quando não há rotulo para os vertices
+            while True:
+                try:
+                    line = file.readline()
+                    # Quando o rotulo for uma string
+                    vertice = {"rotulo": line, "vizinhos": set()}
+                    # Quando o rotulo não estiver dentro de aspas
+                    self.__vertices[int(line)] = vertice
+                except:
+                    break
+
+            while True:
+                line = file.readline()
+                if not line:
+                    break
+                vert1, vert2 = line.split()
+                vert1 = int(vert1)
+                vert2 = int(vert2)
+
+                self.__vertices[vert1]["vizinhos"].add(vert2)
                 self.__vertices[vert2]["vizinhos"].add(vert1)
-            aresta = (vert1, vert2, weight)
-            self.__arestas.append(aresta)
+                aresta = (vert1, vert2)
+                self.__arestas.append(aresta)
+            
+
 
     # Retorna um lista com os vertices vizinhos que saem de v
     def saintes(self, v):
@@ -192,3 +215,15 @@ class Graph:
         for i in range(len(self.__arestas)):
             if (self.__arestas[i][0] == v and self.__arestas[i][1] == u):
                 self.__arestas[i] = (v, u, self.__arestas[i][2] + fluxo)
+
+    # cria duas listas de vertices
+    def grafo_bipartido(self,tipo):
+        x = []
+        y = []
+        for i in self.__arestas:
+            x.append(i[0])
+            y.append(i[1])
+        if tipo == "x":
+            return set(x)
+        elif tipo == "y":
+            return set(y)

@@ -19,7 +19,7 @@ def Prim(G):
 
         K.pop(u)
         for v in (G.vizinhos_lista(u)):
-            for key in (K.keys()):
+            for key in K.keys():
                 if (v == key) and (G.peso_nao_dirigido(u, v) < K[v]):
                     A[v] = u
                     K[v] = G.peso_nao_dirigido(u, v)
