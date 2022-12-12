@@ -13,6 +13,7 @@ class A3:
     if (len(sys.argv) > 1):
         file_path = sys.argv[1]
     else:
+        #file_path = "../instancias/emparelhamento_maximo/pequeno.net"
         file_path = "../instancias/emparelhamento_maximo/gr128_10.net"
 
     grafo.ler(file_path)
